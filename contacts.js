@@ -9,13 +9,13 @@ function listContacts() {
       const contacts = JSON.parse(data);
       return contacts;
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error.message));
   };
 
   function getContactById(contactId) {
     const contact = listContacts()
-    .then(contacts => contacts.find(item => (item.id).toString() === contactId.toString()))
-    .catch(error => console.log(error));
+    .then(contacts => contacts.find(item => item.id === contactId.toString()))
+    .catch(error => console.log(error.message));
     if(!contact){
       return null;
     }
@@ -24,14 +24,14 @@ function listContacts() {
   
   function removeContact(contactId) {
     const removedContact = listContacts()
-    .then(contacts => contacts.find(item => (item.id).toString() === contactId.toString()))
+    .then(contacts => contacts.find(item => item.id === contactId.toString()))
     .catch(error => console.log(error));
     listContacts()
     .then(contacts => {
-      const newContactList = contacts.filter(item => (item.id).toString() !== contactId.toString());
+      const newContactList = contacts.filter(item => item.id !== contactId.toString());
       fs.writeFile(contactsPath, JSON.stringify(newContactList));
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error.message));
     if(!removedContact){
       return null;
     }
@@ -50,7 +50,7 @@ function listContacts() {
       const newContacts = [...contacts, newContact];
       fs.writeFile(contactsPath, JSON.stringify(newContacts));
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error.message));
     return newContact;
   };
 
