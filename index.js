@@ -12,7 +12,7 @@ function invokeAction({ action, id, name, email, phone }) {
       case "list":
         listContacts()
         .then(contacts => console.table(contacts))
-        .catch(error => console.error(error.message));
+        .catch(error => console.log(error.message));
         break;
   
       case "get":
@@ -23,7 +23,7 @@ function invokeAction({ action, id, name, email, phone }) {
         };
           console.log(contact);
         })
-        .catch(error => console.error(error.message));
+        .catch(error => console.log(error.message));
         break;
   
       case "add":
@@ -39,7 +39,7 @@ function invokeAction({ action, id, name, email, phone }) {
         };
           console.log(contact);
         })
-        .catch(error => console.error(error.message));
+        .catch(error => console.log(error.message));
         break;
   
       default:
